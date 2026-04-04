@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shubhamkar Bhalerao | UI/UX Designer & Frontend Engineer</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f7ff;
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a5568;
+      --accent: #6c5ce7;
+      --accent-secondary: #a29bfe;
+      --accent-tertiary: #fd79a8;
+      --accent-glow: rgba(108, 92, 231, 0.15);
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --border: rgba(108, 92, 231, 0.1);
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      --gradient-1: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 50%, #fd79a8 100%);
+      --gradient-2: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+      --gradient-3: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #1a1a2e;
+      --text-primary: #f1f1f1;
+      --text-secondary: #a0a0b0;
+      --accent: #8b74ff;
+      --accent-secondary: #a29bfe;
+      --accent-tertiary: #ff8cae;
+      --accent-glow: rgba(139, 116, 255, 0.15);
+      --card-bg: rgba(26, 26, 46, 0.85);
+      --border: rgba(139, 116, 255, 0.15);
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Animated Background with Creative Shapes */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      background: var(--accent-glow);
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: floatShape 20s ease-in-out infinite;
+    }
+
+    .shape-1 {
+      width: 400px;
+      height: 400px;
+      top: -100px;
+      left: -100px;
+      background: rgba(108, 92, 231, 0.3);
+      animation-duration: 25s;
+    }
+
+    .shape-2 {
+      width: 500px;
+      height: 500px;
+      bottom: -150px;
+      right: -150px;
+      background: rgba(253, 121, 168, 0.2);
+      animation-duration: 30s;
+      animation-delay: 2s;
+    }
+
+    .shape-3 {
+      width: 300px;
+      height: 300px;
+      top: 40%;
+      left: 60%;
+      background: rgba(0, 184, 148, 0.2);
+      animation-duration: 18s;
+      animation-delay: 5s;
+    }
+
+    @keyframes floatShape {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(50px, -50px) rotate(120deg); }
+      66% { transform: translate(-30px, 30px) rotate(240deg); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(var(--bg-primary), 0.7);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+    }
+
+    .logo::after {
+      content: '✨';
+      position: absolute;
+      right: -25px;
+      top: 0;
+      font-size: 1rem;
+      background: none;
+      -webkit-background-clip: unset;
+      color: var(--accent-tertiary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-1);
+      transition: width 0.2s;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-primary);
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(15deg);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gradient-1);
+      color: white;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      filter: brightness(1.05);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--gradient-1);
+      color: white;
+      transform: translateY(-3px);
+      border-color: transparent;
+    }
+
+    .btn-secondary {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      opacity: 0.9;
+    }
+
+    /* Hero Section - Creative */
+    .hero {
+      padding: 100px 0 120px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero h1 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      animation: wave 2s infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(15deg); }
+      75% { transform: rotate(-10deg); }
+    }
+
+    .hero-sub {
+      max-width: 680px;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-weight: 500;
+      text-align: justify;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Section styles */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 48px;
+      text-align: center;
+      letter-spacing: -0.02em;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .section-title::before {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient-1);
+      border-radius: 4px;
+    }
+
+    /* About - Creative Card */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 32px 40px;
+      border-radius: 28px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 500;
+      text-align: justify;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-content::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 6rem;
+      opacity: 0.1;
+      font-family: serif;
+      color: var(--accent);
+    }
+
+    .about-content p {
+      margin-bottom: 16px;
+    }
+
+    /* Design Process Section - New */
+    .design-process {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .process-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 28px 20px;
+      border-radius: 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .process-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
+
+    .process-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--gradient-1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .process-card h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .process-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 24px;
+      transition: all 0.3s;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
+
+    .skill-category h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: var(--gradient-1);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* Experience & Projects */
+    .exp-item, .project-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: all 0.3s;
+    }
+
+    .exp-item:hover, .project-card:hover {
+      transform: translateX(8px);
+      border-color: var(--accent);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .exp-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .exp-company {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .exp-date {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .exp-duties {
+      margin-top: 16px;
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      text-align: justify;
+    }
+
+    .exp-duties li {
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      text-align: justify;
+    }
+
+    .project-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .tech-badge {
+      background: var(--bg-secondary);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Design Portfolio Showcase */
+    .design-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .design-item {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .design-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .design-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .design-item h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    /* Certifications */
+    .certs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .cert-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .cert-card:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+      background: var(--gradient-1);
+      color: white;
+    }
+
+    /* Contact */
+    .contact-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .contact-item {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 28px 36px;
+      border-radius: 28px;
+      text-align: center;
+      transition: all 0.3s;
+      min-width: 220px;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .contact-item i {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .contact-item p {
+      font-weight: 600;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      text-align: center;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--gradient-1);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 99;
+      border: none;
+    }
+
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        padding: 20px;
+        gap: 16px;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .exp-header {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .about-content {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-animation">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+</div>
+
+<header>
+  <div class="container">
+    <div class="nav">
+      <div class="logo">SB</div>
+      <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-badge">
+        <i class="fas fa-paintbrush"></i> UI/UX Designer & Frontend Engineer
+      </div>
+      <h1>Crafting Beautiful <span>✨</span><br>Digital Experiences</h1>
+      <p class="hero-sub">UI/UX Designer and Frontend Software Engineer with nearly 5 years of experience. I blend creative design with technical excellence to build intuitive, high-performance web applications that users love.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Design Work</a>
+        <a href="#" class="btn btn-outline" id="downloadResumeBtn">Download Resume</a>
+        <a href="#contact" class="btn btn-secondary">Let's Collaborate</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <p>I'm a UI/UX Designer and Frontend Software Engineer who believes that great design is invisible — it just works. With nearly 5 years of experience, I specialize in creating beautiful, intuitive interfaces that solve real user problems.</p>
+        <p>Currently at <strong>Drivetech Intelligence Pvt Ltd</strong>, I lead UI/UX design initiatives and develop scalable frontend solutions. I bridge the gap between design and development, ensuring pixel-perfect implementations that maintain design integrity.</p>
+        <p>Previously at <strong>Invictus Web Solutions</strong>, I honed my skills in responsive web design, SEO optimization, and creating user-centered digital experiences. My design toolkit includes Figma for wireframing, prototyping, and creating design systems.</p>
+        <p>My design philosophy: Every pixel has a purpose, every interaction tells a story. I'm passionate about creating accessible, inclusive designs that delight users and drive business results.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <h2 class="section-title">My Design Process</h2>
+      <div class="design-process">
+        <div class="process-card"><div class="process-icon"><i class="fas fa-lightbulb"></i></div><h4>Empathize</h4><p>Research & understand user needs, pain points, and behaviors through interviews and analytics.</p></div>
+        <div class="process-card"><div class="process-icon"><i class="fas fa-draw-polygon"></i></div><h4>Define</h4><p>Analyze findings to define clear problem statements and user personas that guide design decisions.</p></div>
+        <div class="process-card"><div class="process-icon"><i class="fas fa-pencil-ruler"></i></div><h4>Ideate</h4><p>Brainstorm solutions, sketch wireframes, and create low-fidelity prototypes for rapid iteration.</p></div>
+        <div class="process-card"><div class="process-icon"><i class="fas fa-mobile-alt"></i></div><h4>Prototype</h4><p>Build high-fidelity interactive prototypes in Figma for user testing and stakeholder feedback.</p></div>
+        <div class="process-card"><div class="process-icon"><i class="fas fa-code"></i></div><h4>Implement</h4><p>Translate designs into production-ready code with pixel-perfect precision and smooth interactions.</p></div>
+        <div class="process-card"><div class="process-icon"><i class="fas fa-chart-line"></i></div><h4>Iterate</h4><p>Test, gather feedback, and continuously improve based on real user data and analytics.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Design & Dev Arsenal</h2>
+      <div class="skills-grid">
+        <div class="skill-category"><h3><i class="fas fa-palette"></i> Design Tools</h3><div class="skill-items"><span class="skill-tag">Figma</span><span class="skill-tag">Adobe XD</span><span class="skill-tag">Sketch</span><span class="skill-tag">Framer</span><span class="skill-tag">InVision</span><span class="skill-tag">Balsamiq</span></div></div>
+        <div class="skill-category"><h3><i class="fas fa-code"></i> Frontend</h3><div class="skill-items"><span class="skill-tag">React.js</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">HTML5/CSS3</span><span class="skill-tag">Tailwind</span><span class="skill-tag">Redux</span></div></div>
+        <div class="skill-category"><h3><i class="fas fa-mobile-alt"></i> UI/UX</h3><div class="skill-items"><span class="skill-tag">Wireframing</span><span class="skill-tag">Prototyping</span><span class="skill-tag">User Research</span><span class="skill-tag">Usability Testing</span><span class="skill-tag">Design Systems</span><span class="skill-tag">Accessibility</span></div></div>
+        <div class="skill-category"><h3><i class="fas fa-tools"></i> Tools & Tech</h3><div class="skill-items"><span class="skill-tag">Git</span><span class="skill-tag">Jira</span><span class="skill-tag">Notion</span><span class="skill-tag">Miro</span><span class="skill-tag">Zeplin</span><span class="skill-tag">Storybook</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-title">UI/UX Designer & Frontend Engineer</span><span class="exp-date">04/2022 – Present</span></div>
+        <div class="exp-company">Drivetech Intelligence Pvt Ltd</div>
+        <ul class="exp-duties">
+          <li>Lead UI/UX design for enterprise dashboards, creating intuitive interfaces used by 500+ daily active users.</li>
+          <li>Design and maintain design systems in Figma, ensuring consistency across 10+ product modules.</li>
+          <li>Conduct user research and usability testing to validate design decisions and improve user satisfaction by 35%.</li>
+          <li>Bridge design and development by creating pixel-perfect React components from Figma prototypes.</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-title">Web Designer & Developer</span><span class="exp-date">06/2021 – 04/2022</span></div>
+        <div class="exp-company">Invictus Web Solutions</div>
+        <ul class="exp-duties">
+          <li>Designed and developed 20+ responsive websites with focus on mobile-first design and accessibility.</li>
+          <li>Created wireframes, mockups, and interactive prototypes using Figma for client presentations.</li>
+          <li>Optimized UI/UX for conversion, resulting in average 25% increase in user engagement.</li>
+          <li>Managed SEO and digital marketing strategies to improve website visibility and user acquisition.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Design Projects</h2>
+      
+      <div class="design-showcase">
+        <div class="design-item"><div class="design-icon">📊</div><h4>Automotive Dashboard UI/UX</h4><p>Designed complex data dashboard for ARAI with interactive charts and customizable views.</p><div class="project-tech"><span class="tech-badge">Figma</span><span class="tech-badge">Prototyping</span><span class="tech-badge">Data Viz</span></div></div>
+        <div class="design-item"><div class="design-icon">⚙️</div><h4>Generator Tracking System</h4><p>End-to-end UX design for Greaves Cotton's generator monitoring platform.</p><div class="project-tech"><span class="tech-badge">User Research</span><span class="tech-badge">Wireframes</span><span class="tech-badge">Figma</span></div></div>
+        <div class="design-item"><div class="design-icon">📱</div><h4>Mobile Data Entry App</h4><p>Mobile-first UI design for Ather Energy with focus on form usability and validation.</p><div class="project-tech"><span class="tech-badge">Mobile UI</span><span class="tech-badge">Prototyping</span><span class="tech-badge">UX Flow</span></div></div>
+      </div>
+
+      <div class="project-card"><h3>🏭 Operation Management System UI/UX Redesign</h3><p>Led complete UI/UX overhaul for Kishore Pumps' operation management platform, creating intuitive interfaces for stock maintenance, purchase management, and order processing workflows.</p><div><strong>✨ My Role:</strong> User research, wireframing, high-fidelity prototyping, usability testing, and design system creation.</div><div class="project-tech"><span class="tech-badge">Figma</span><span class="tech-badge">User Research</span><span class="tech-badge">Design System</span><span class="tech-badge">Prototyping</span></div></div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="container">
+      <h2 class="section-title">Certifications</h2>
+      <div class="certs-grid">
+        <span class="cert-card">🎨 UI/UX Design with Figma</span>
+        <span class="cert-card">📜 ReactJS</span>
+        <span class="cert-card">📜 JavaScript Bootcamp</span>
+        <span class="cert-card">🔍 Google SEO Fundamentals</span>
+        <span class="cert-card">🌐 Programming Foundations</span>
+        <span class="cert-card">⚛️ Full Stack Development</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Let's Create Together</h2>
+      <div class="contact-flex">
+        <div class="contact-item"><i class="fas fa-envelope"></i><p>shubhamkarbhalerao@gmail.com</p></div>
+        <div class="contact-item"><i class="fas fa-phone-alt"></i><p>+91 8329731188</p></div>
+        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><p>Pune, India</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Shubhamkar Bhalerao — UI/UX Designer & Frontend Engineer. Designed with ❤️ and ✨</p>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTopBtn">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  const menuBtn = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  if(menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#" || targetId === "") return;
+      const targetElem = document.querySelector(targetId);
+      if(targetElem) {
+        e.preventDefault();
+        targetElem.scrollIntoView({ behavior: 'smooth' });
+        if(navLinks.classList.contains('show')) navLinks.classList.remove('show');
+      }
+    });
+  });
+
+  const themeToggle = document.getElementById('themeToggle');
+  const icon = themeToggle.querySelector('i');
+  if(localStorage.getItem('theme') === 'dark') {
+    document.body.setAttribute('data-theme', 'dark');
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+  }
+  themeToggle.addEventListener('click', () => {
+    if(document.body.getAttribute('data-theme') === 'dark') {
+      document.body.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    } else {
+      document.body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  });
+
+  const scrollBtn = document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 300) {
+      scrollBtn.classList.add('show');
+    } else {
+      scrollBtn.classList.remove('show');
+    }
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  const downloadBtn = document.getElementById('downloadResumeBtn');
+  if(downloadBtn) {
+    downloadBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const resumeContent = `Shubhamkar Bhalerao - UI/UX Designer & Frontend Engineer
+================================================================================
+CONTACT: +91 8329731188 | shubhamkarbhalerao@gmail.com | Pune, India
+
+PROFILE: UI/UX Designer and Frontend Engineer with 5 years of experience crafting beautiful, intuitive digital experiences. Expert in Figma, React.js, and user-centered design.
+
+DESIGN SKILLS: Figma, Wireframing, Prototyping, User Research, Usability Testing, Design Systems, Accessibility
+
+TECH SKILLS: React.js, JavaScript, TypeScript, HTML5/CSS3, Tailwind, Git
+
+EXPERIENCE:
+• Drivetech Intelligence (2022-Present): Lead UI/UX designer & frontend engineer
+• Invictus Web Solutions (2021-2022): Web designer & developer
+
+PORTFOLIO: Available upon request`;
+      const blob = new Blob([resumeContent], {type: 'text/plain'});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Shubhamkar_Designer_Resume.txt';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    });
+  }
+</script>
+</body>
+</html>
