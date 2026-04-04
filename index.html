@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shubhamkar Bhalerao | Frontend Software Engineer</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.2);
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --border: rgba(0, 0, 0, 0.05);
+      --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent: #60a5fa;
+      --accent-glow: rgba(96, 165, 250, 0.2);
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --border: rgba(255, 255, 255, 0.05);
+      --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 50%, var(--accent-glow) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
+      50% { transform: translate(10%, 10%) rotate(5deg); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(var(--bg-primary), 0.7);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-primary);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.1);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      opacity: 0.9;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0 120px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-sub {
+      max-width: 680px;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-weight: 500;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Section styles */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 48px;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    /* About - Glass card */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 32px 40px;
+      border-radius: 28px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-category {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 24px;
+      transition: all 0.3s;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
+
+    .skill-category h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* Experience & Projects */
+    .exp-item, .project-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: all 0.3s;
+    }
+
+    .exp-item:hover, .project-card:hover {
+      transform: translateX(8px);
+      border-color: var(--accent);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .exp-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .exp-company {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .exp-date {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .exp-duties {
+      margin-top: 16px;
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .exp-duties li {
+      margin-bottom: 8px;
+    }
+
+    .project-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .tech-badge {
+      background: var(--bg-secondary);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Certifications */
+    .certs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .cert-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .cert-card:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
+    /* Contact */
+    .contact-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .contact-item {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 28px 36px;
+      border-radius: 28px;
+      text-align: center;
+      transition: all 0.3s;
+      min-width: 220px;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .contact-item i {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .contact-item p {
+      font-weight: 600;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      text-align: center;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        padding: 20px;
+        gap: 16px;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .exp-header {
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-animation"></div>
+
+<header>
+  <div class="container">
+    <div class="nav">
+      <div class="logo">SB</div>
+      <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-badge">
+        <i class="fas fa-code"></i> Available for opportunities
+      </div>
+      <h1>Frontend Software Engineer<br>Building Scalable Web Apps</h1>
+      <p class="hero-sub">Software Engineer with nearly 5 years of experience specializing in React.js, JavaScript, and UI Development. Passionate about building responsive, user-friendly applications and optimizing performance through modern web technologies.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#" class="btn btn-outline" id="downloadResumeBtn">Download Resume</a>
+        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <p>Dedicated Software Engineer with nearly 5 years of experience in front-end development, proficient in React.js, JavaScript, and UI/UX optimization. I have a proven track record of creating responsive applications, enhancing performance, and ensuring the technical feasibility of designs in collaboration with cross-functional teams.</p>
+        <p>Currently working at <strong>Drivetech Intelligence Pvt Ltd</strong>, I develop scalable user-facing features and reusable components while ensuring the technical feasibility of UI/UX designs. I collaborate with cross-functional teams to deliver high-performance applications.</p>
+        <p>Previously, I worked with <strong>Invictus Web Solutions</strong> and <strong>Technovision solution</strong>, where I developed responsive websites and handled frontend development tasks.</p>
+        <p>With a B.Tech in Electronics and Telecommunication Engineering, I am skilled in TypeScript, Node.js, and REST APIs, and committed to driving innovation in each project. My diverse project experience, including mobile application development and system design, underlines my ability to align technical solutions with client objectives, ensuring efficiency and reliability.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Technical Arsenal</h2>
+      <div class="skills-grid">
+        <div class="skill-category"><h3>Frontend</h3><div class="skill-items"><span class="skill-tag">React.js</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Angular</span><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">Redux</span><span class="skill-tag">RxJS</span></div></div>
+        <div class="skill-category"><h3>Backend</h3><div class="skill-items"><span class="skill-tag">Node.js</span><span class="skill-tag">REST APIs</span><span class="skill-tag">.NET</span><span class="skill-tag">SQL</span><span class="skill-tag">Python</span></div></div>
+        <div class="skill-category"><h3>Tools</h3><div class="skill-items"><span class="skill-tag">Git</span><span class="skill-tag">Figma</span><span class="skill-tag">Power BI</span><span class="skill-tag">Excel</span><span class="skill-tag">DSA</span></div></div>
+        <div class="skill-category"><h3>Other</h3><div class="skill-items"><span class="skill-tag">UI Development</span><span class="skill-tag">API Integration</span><span class="skill-tag">Performance Optimization</span><span class="skill-tag">Responsive Design</span><span class="skill-tag">Full Stack</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-title">Software Engineer</span><span class="exp-date">04/2022 – Present</span></div>
+        <div class="exp-company">Drivetech Intelligence Pvt Ltd</div>
+        <ul class="exp-duties">
+          <li>Develop new user-facing features and reusable components</li>
+          <li>Ensure technical feasibility of UI/UX designs, focusing on performance</li>
+          <li>Collaborate with cross-functional teams for enhanced technology exposure</li>
+          <li>Optimize front-end performance and maintain code quality</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-title">Web Developer</span><span class="exp-date">06/2021 – 04/2022</span></div>
+        <div class="exp-company">Invictus Web Solutions</div>
+        <ul class="exp-duties">
+          <li>Developed user-friendly and responsive websites</li>
+          <li>Utilized WordPress for site design and maintained client web functionality</li>
+          <li>Enhanced websites through troubleshooting and alignment fixes</li>
+          <li>Managed digital marketing tasks including SEO and social media</li>
+        </ul>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header"><span class="exp-title">Trainee Software Engineer</span><span class="exp-date">02/2021 – 06/2021</span></div>
+        <div class="exp-company">Technovision Solution</div>
+        <ul class="exp-duties">
+          <li>Designed and maintained user-friendly software for vehicle testing</li>
+          <li>Focused on using HTML and CSS for software frontend development</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="project-card"><h3>📊 Automotive Data Monitoring Dashboard (ARAI) - 31 Days</h3><div style="font-weight:700;">Problem:</div><p>Engineering teams needed better monitoring of vehicle testing data.</p><div style="font-weight:700;">Solution:</div><p>Led the design and development of a web-based application for ARAI to enhance data monitoring capabilities.</p><div><strong>✨ Features:</strong> Interactive dashboard, custom data filtering, engineer task tracking, report generation, customizable data views.</div><div class="project-tech"><span class="tech-badge">React.js</span><span class="tech-badge">JavaScript</span><span class="tech-badge">REST APIs</span></div></div>
+      <div class="project-card"><h3>⚙️ Generator Tracking System (Greaves Cotton) - O Days</h3><div style="font-weight:700;">Problem:</div><p>Engineers needed real-time tracking of generator usage.</p><div style="font-weight:700;">Solution:</div><p>Designed a comprehensive software solution utilizing Figma for enhanced user experience, enabling real-time tracking of generator usage including precise location and consumption data.</p><div><strong>✨ Features:</strong> Real-time tracking, consumption monitoring, multi-user dashboards tailored for engineers, administrators, and management.</div><div class="project-tech"><span class="tech-badge">Figma</span><span class="tech-badge">Web Technologies</span></div></div>
+      <div class="project-card"><h3>🏭 Operation Management System (Kishore Pumps) - 330 Days</h3><p>Developed software for operation management focusing on purchasing, stock maintenance, and ordering processes.</p><div><strong>✨ Features:</strong> Stock maintenance, purchase management, order processing, enhanced data handling capabilities.</div><div class="project-tech"><span class="tech-badge">Web application stack</span></div></div>
+      <div class="project-card"><h3>📱 Mobile Data Entry Application (Ather Energy) - 756 Days</h3><p>Developed a mobile application to automate data entry tasks, streamlining operations by automating calculations and integrating backend systems.</p><div><strong>✨ Features:</strong> Automated calculations, real-time validation, backend integration, custom workflows.</div><div class="project-tech"><span class="tech-badge">React Native</span><span class="tech-badge">Mobile Web Stack</span></div></div>
+      <div class="project-card"><h3>🌍 GPS Location System - 1456 Days</h3><p>Developed a Global Positioning System feature leveraging Geolocation API to enhance user location access.</p><div><strong>✨ Features:</strong> Real-time location tracking, data collection and analysis, high reliability and accuracy.</div><div class="project-tech"><span class="tech-badge">Geolocation API</span><span class="tech-badge">JavaScript</span></div></div>
+      <div class="project-card"><h3>🌐 Dynamic Landing Page - 1760 Days</h3><p>Developed a responsive landing page template and transitioned static website to dynamic platform.</p><div><strong>✨ Features:</strong> Responsive design, PHP integration, MySQL database management.</div><div class="project-tech"><span class="tech-badge">HTML/CSS</span><span class="tech-badge">Bootstrap</span><span class="tech-badge">PHP</span><span class="tech-badge">MySQL</span></div></div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="container">
+      <h2 class="section-title">Certifications</h2>
+      <div class="certs-grid">
+        <span class="cert-card">📜 ReactJS</span>
+        <span class="cert-card">📜 JavaScript Bootcamp</span>
+        <span class="cert-card">🎨 UI/UX Design with Figma</span>
+        <span class="cert-card">🔍 Google SEO Fundamentals</span>
+        <span class="cert-card">🌐 Programming Foundations (HTML, CSS, JS)</span>
+        <span class="cert-card">⚛️ Full Stack Development (React + Node.js)</span>
+        <span class="cert-card">📘 HTML5, CSS3</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="contact-flex">
+        <div class="contact-item"><i class="fas fa-envelope"></i><p>shubhamkarbhalerao@gmail.com</p></div>
+        <div class="contact-item"><i class="fas fa-phone-alt"></i><p>+91 8329731188</p></div>
+        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><p>Pune, India</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Shubhamkar Bhalerao — Frontend Software Engineer. Crafted with 🚀</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const menuBtn = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  if(menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#" || targetId === "") return;
+      const targetElem = document.querySelector(targetId);
+      if(targetElem) {
+        e.preventDefault();
+        targetElem.scrollIntoView({ behavior: 'smooth' });
+        if(navLinks.classList.contains('show')) navLinks.classList.remove('show');
+      }
+    });
+  });
+
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const icon = themeToggle.querySelector('i');
+  if(localStorage.getItem('theme') === 'dark') {
+    document.body.setAttribute('data-theme', 'dark');
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+  }
+  themeToggle.addEventListener('click', () => {
+    if(document.body.getAttribute('data-theme') === 'dark') {
+      document.body.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    } else {
+      document.body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  });
+
+  // Download resume with complete content from PDF
+  const downloadBtn = document.getElementById('downloadResumeBtn');
+  if(downloadBtn) {
+    downloadBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const resumeContent = `Shubhamkar Bhalerao - Frontend Software Engineer
+================================================================================
+
+CONTACT INFORMATION
+--------------------------------------------------------------------------------
+Phone: +91 8329731188
+Email: shubhamkarbhalerao@gmail.com
+Location: Pune, India
+Experience: 4 Years 10 Months
+
+PROFESSIONAL SUMMARY
+--------------------------------------------------------------------------------
+Dedicated Software Engineer with nearly 5 years of experience in front-end development, 
+proficient in React.js, JavaScript, and UI/UX optimization. Proven track record of creating 
+responsive applications, enhancing performance, and ensuring technical feasibility of designs 
+in collaboration with cross-functional teams. Skilled in TypeScript, Node.js, and REST APIs, 
+committed to driving innovation in each project.
+
+KEY SKILLS
+--------------------------------------------------------------------------------
+• Frontend: React.js, JavaScript, TypeScript, Angular, HTML5, CSS3, Redux, RxJS
+• Backend: Node.js, REST APIs, .NET, SQL, Python
+• Tools: Git, Figma, Power BI, Excel, DSA
+• Other: UI Development, API Integration, Performance Optimization, Responsive Design, Full Stack
+
+WORK EXPERIENCE
+--------------------------------------------------------------------------------
+
+Software Engineer | Drivetech Intelligence Pvt Ltd | 04/2022 – Present
+• Develop new user-facing features and reusable components
+• Ensure technical feasibility of UI/UX designs, focusing on performance
+• Collaborate with cross-functional teams for enhanced technology exposure
+• Optimize front-end performance and maintain code quality
+
+Web Developer | Invictus Web Solutions | 06/2021 – 04/2022
+• Developed user-friendly and responsive websites
+• Utilized WordPress for site design and maintained client web functionality
+• Enhanced websites through troubleshooting and alignment fixes
+• Managed digital marketing tasks including SEO and social media
+
+Trainee Software Engineer | Technovision Solution | 02/2021 – 06/2021
+• Designed and maintained user-friendly software for vehicle testing
+• Focused on using HTML and CSS for software frontend development
+
+EDUCATION
+--------------------------------------------------------------------------------
+B.Tech - Electronics and Telecommunication Engineering | 2021
+Marathwada Institute of Technology, Aurangabad | Grade: 6.9/10
+
+12th (2015) | Grade: 60-64.9%
+10th (2011) | Grade: 65-69.9%
+
+LANGUAGES
+--------------------------------------------------------------------------------
+Marathi, Hindi, English
+
+CERTIFICATIONS
+--------------------------------------------------------------------------------
+• ReactJS
+• JavaScript Bootcamp
+• UI/UX Design with Figma
+• Google SEO Fundamentals
+• Programming Foundations with JavaScript, HTML and CSS
+• Full Stack Development (React + Node.js)
+• HTML5, CSS3
+
+PROJECTS
+--------------------------------------------------------------------------------
+
+1. Automotive Data Monitoring Dashboard (ARAI) - 31 Days
+   • Led design and development of web-based application for data monitoring
+   • Implemented tracking features for daily and monthly data with customizable views
+   • Facilitated comprehensive report generation and interactive dashboard
+
+2. Generator Tracking System (Greaves Cotton) - O Days
+   • Designed comprehensive software solution using Figma
+   • Enabled real-time tracking of generator usage including location and consumption data
+   • Created tailored interfaces for engineers, administrators, and management
+
+3. Operation Management System (Kishore Pumps) - 330 Days
+   • Developed software for purchasing, stock maintenance, and ordering processes
+   • Enhanced data handling capabilities for improved accuracy and efficiency
+   • Streamlined operational workflows to minimize downtime
+
+4. Mobile Data Entry Application (Ather Energy) - 756 Days
+   • Developed mobile application to automate data entry processes
+   • Automated calculations and integrated backend systems with custom workflows
+   • Ensured real-time data validation for enhanced reliability
+
+5. GPS Location System - 1456 Days
+   • Developed GPS feature leveraging Geolocation API
+   • Implemented real-time location tracking and data collection
+   • Ensured high reliability through rigorous testing
+
+6. Dynamic Landing Page - 1760 Days
+   • Developed responsive landing page template using HTML, CSS, Bootstrap
+   • Transitioned static website to dynamic platform using PHP
+   • Managed and optimized MySQL database
+
+7. Forest Fire Detector - 123 Days
+   • Developed data acquisition system integrating cloud services
+   • Involved in testing outputs to ensure reliability and efficiency
+
+================================================================================
+References available upon request.
+================================================================================`;
+      const blob = new Blob([resumeContent], {type: 'text/plain'});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Shubhamkar_Bhalerao_Resume.txt';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    });
+  }
+</script>
+</body>
+</html>
