@@ -155,18 +155,6 @@ dialog p,dialog ul{margin:0}dialog ul{padding-left:20px}dialog li{margin-bottom:
 .tl{position:relative;overflow:hidden}.tl>.wrap{position:relative;z-index:1}
 .tl::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.7;background:repeating-linear-gradient(135deg,var(--line) 0 1px,transparent 1px 22px);-webkit-mask-image:linear-gradient(100deg,transparent 35%,#000);mask-image:linear-gradient(100deg,transparent 35%,#000)}
 .cta2::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(color-mix(in srgb,var(--on-accent) 26%,transparent) 1.3px,transparent 1.5px) 0 0/26px 26px;-webkit-mask-image:linear-gradient(60deg,#000,transparent 55%);mask-image:linear-gradient(60deg,#000,transparent 55%)}
-.cph{font-size:clamp(2.25rem,5vw,4rem);margin-bottom:14px}
-.csub{color:var(--muted);font-size:1.125rem;max-width:64ch;margin-bottom:36px}
-.clist{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;list-style:none;padding:0;margin:0}
-.ccard{display:flex;flex-direction:column;gap:10px;width:100%;height:100%;text-align:left;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:14px 14px 18px;cursor:pointer}
-.ccard:hover{border-color:var(--accent)}
-.ccard .cthumb{margin:0 0 4px;width:100%;height:auto}
-.ccard .kind{font-weight:700;font-size:.875rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
-.ccard h3{font-size:1.75rem}.ccard p{margin:0;color:var(--muted)}
-.ccard .more{margin-top:auto;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px}
-#cdlg{width:min(760px,100% - 28px)}
-#cdlg figure{margin:14px 0 0}#cdlg figcaption{color:var(--muted);font-size:.9375rem;margin-top:6px}
-@media (max-width:900px){.clist{grid-template-columns:1fr}}
 @media (max-width:900px){.avatar{width:80px;height:80px}.frame{margin-left:14px;max-width:300px}.badge{left:-14px}}
 
 @media (max-width:900px){
@@ -191,7 +179,7 @@ dialog p,dialog ul{margin:0}dialog ul{padding-left:20px}dialog li{margin-bottom:
 <header class="site"><div class="wrap bar">
  <a class="brand" href="#top">Shubhamkar B.</a>
  <nav id="nav" aria-label="Main"><ul>
-  <li><a href="#work">Work</a></li><li><a href="#concepts">Concepts</a></li><li><a href="#about">About</a></li><li><a href="Shubhamkar_Bhalerao_cv.pdf" download>Resume</a></li><li><a href="#contact">Contact</a></li>
+  <li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="Shubhamkar_Bhalerao_cv.pdf" download>Resume</a></li><li><a href="#contact">Contact</a></li>
  </ul></nav>
  <div class="tools">
   <button class="tbtn" id="theme" type="button" aria-pressed="false">Dark mode</button>
@@ -227,12 +215,6 @@ dialog p,dialog ul{margin:0}dialog ul{padding-left:20px}dialog li{margin-bottom:
  <div id="slides"></div>
  <div class="ctrl" style="margin-top:36px"><button class="tbtn" id="prev" type="button">Previous case study</button><button class="tbtn" id="next" type="button">Next case study</button></div>
  <p class="note" style="color:inherit;opacity:.9;margin-top:28px">These are client projects under NDA, so real screens aren't shown. The images are original illustrations of the layout ideas.</p>
-</div></section>
-
-<section id="concepts" aria-labelledby="h-cp"><div class="wrap">
- <h2 id="h-cp" class="cph">Concept projects</h2>
- <p class="csub">Beyond client work, these are concept designs on a website, a mobile app and a web app. They use sample content and have no real users, so they show my process and decisions, not results.</p>
- <ul class="clist" id="clist"></ul>
 </div></section>
 
 <section id="about" aria-labelledby="h-about"><div class="wrap about">
@@ -272,7 +254,6 @@ dialog p,dialog ul{margin:0}dialog ul{padding-left:20px}dialog li{margin-bottom:
 
 <footer><div class="wrap"><p>© <span id="yr">2026</span> Shubhamkar Bhalerao. All rights reserved.</p><a href="#top">Back to top</a></div></footer>
 
-<dialog id="cdlg" aria-labelledby="ct"><button class="tbtn close" type="button" data-close>Close</button><div id="cc"></div></dialog>
 <dialog id="dlg" aria-labelledby="dt"><button class="tbtn close" type="button" data-close>Close</button><div id="dc"></div></dialog>
 
 <script>
@@ -352,79 +333,6 @@ document.addEventListener('click',e=>{
 });
 dlg.addEventListener('click',e=>{if(e.target===dlg||e.target.hasAttribute('data-close'))dlg.close()});
 dlg.addEventListener('close',()=>opener&&opener.focus());
-
-/* concept projects: original mockups with sample content */
-const br=c=>`<rect class="w l" x="8" y="8" width="464" height="284" rx="12"/><path class="l" d="M8 38h464"/><circle class="s" cx="26" cy="23" r="4"/><circle class="g" cx="40" cy="23" r="4"/><circle class="g" cx="54" cy="23" r="4"/><rect class="g" x="84" y="16" width="200" height="14" rx="7"/>`+c;
-const mtn=(x,y,w,h)=>`<path class="s" d="M${x} ${y+h}l${w*.28} ${-h*.6} ${w*.18} ${h*.3} ${w*.24} ${-h*.7} ${w*.3} ${h}z"/>`;
-const B=t=>`style="font-size:${t}px;font-weight:700"`;
-const px=(x,c)=>`<rect class="w l" x="${x}" y="12" width="130" height="276" rx="20"/><rect class="g" x="${x+45}" y="20" width="40" height="5" rx="2.5"/>`+c;
-const CPM={
- trails:[
-  br(`<text class="tk" x="24" y="62" ${B(13)}>Pune Trails</text>`+[0,1,2].map(i=>`<rect class="g" x="${330+i*44}" y="54" width="36" height="8" rx="4"/>`).join('')
-   +`<text class="tk" x="24" y="104" ${B(19)}>Find a trek that fits you</text><rect class="g" x="24" y="114" width="220" height="7" rx="3.5"/>`
-   +`<rect class="w l" x="24" y="132" width="256" height="28" rx="14"/><rect class="f" x="32" y="138" width="60" height="16" rx="8"/><text class="tk" x="62" y="150" text-anchor="middle">Easy</text><rect class="f" x="98" y="138" width="76" height="16" rx="8"/><text class="tk" x="136" y="150" text-anchor="middle">Oct–Feb</text><rect class="s" x="216" y="138" width="58" height="16" rx="8"/><text class="tw" x="245" y="150" text-anchor="middle">Search</text>`
-   +`<circle class="g" cx="420" cy="78" r="14"/>`+mtn(300,76,160,84)
-   +[0,1,2].map(i=>{const x=24+i*150;return `<rect class="f" x="${x}" y="176" width="136" height="106" rx="10"/><rect class="w l" x="${x+8}" y="184" width="120" height="44" rx="8"/>${mtn(x+16,192,104,30)}<text class="tk" x="${x+10}" y="246" ${B(11)}>${['Rajgad','Sinhagad','Lohagad'][i]}</text><text class="tk" x="${x+10}" y="261">${['Moderate · 6 hrs','Easy · 3 hrs','Easy · 4 hrs'][i]}</text><rect class="s" x="${x+10}" y="268" width="38" height="6" rx="3"/>`}).join('')),
-  br(`<text class="tk" x="24" y="62" ${B(13)}>Pune Trails</text><text class="tk" x="24" y="84">Home › Forts › Rajgad</text>`
-   +`<rect class="f" x="24" y="94" width="270" height="86" rx="10"/><circle class="g" cx="262" cy="116" r="10"/>`+mtn(40,108,230,64)
-   +`<text class="tk" x="24" y="206" ${B(16)}>Rajgad</text>`
-   +['Moderate','6 hrs','Oct–Feb'].map((t,i)=>`<rect class="${i?'g':'s'}" x="${100+i*66}" y="193" width="60" height="18" rx="9"/><text class="${i?'tk':'tw'}" x="${130+i*66}" y="206" text-anchor="middle">${t}</text>`).join('')
-   +[0,1,2].map(i=>`<circle class="s" cx="34" cy="${232+i*20}" r="7"/><text class="tw" x="34" y="${235+i*20}" text-anchor="middle">${i+1}</text><rect class="g" x="48" y="${229+i*20}" width="${[190,160,210][i]}" height="7" rx="3.5"/>`).join('')
-   +`<rect class="f" x="312" y="52" width="152" height="232" rx="10"/><text class="tk" x="324" y="74" ${B(11)}>Before you go</text>`
-   +[0,1,2,3].map(i=>`<rect class="l" x="324" y="${88+i*26}" width="12" height="12" rx="3"/><path class="ck" d="M327 ${94+i*26}l2.5 2.5 4-5"/><rect class="g" x="344" y="${90+i*26}" width="${[88,70,96,60][i]}" height="8" rx="4"/>`).join('')
-   +`<rect class="s" x="324" y="240" width="128" height="30" rx="15"/><text class="tw" x="388" y="259" text-anchor="middle">Save to my list</text>`)
- ],
- charge:[
-  `<rect class="f" width="480" height="300" rx="12"/>`
-  +px(20,`<rect class="f" x="28" y="34" width="114" height="140" rx="8"/><path class="l" d="M32 70c30 10 50-20 106 6M60 38c-8 40 14 60 4 134M100 38c10 50-10 80 20 134"/>`+[[58,84,'s'],[104,110,'s'],[84,148,'g'],[126,70,'g']].map(([cx,cy,c])=>`<circle class="${c}" cx="${cx}" cy="${cy}" r="7"/>`).join('')+`<rect class="w l" x="30" y="40" width="110" height="18" rx="9"/><text class="tk" x="40" y="52">Search charger</text><rect class="w l" x="26" y="184" width="118" height="96" rx="12"/><text class="tk" x="36" y="204" ${B(11)}>Nearby chargers</text>`+[0,1].map(i=>`<circle class="${i?'g':'s'}" cx="42" cy="${224+i*28}" r="6"/><rect class="g" x="54" y="${220+i*28}" width="48" height="8" rx="4"/><text class="tk" x="132" y="${228+i*28}" text-anchor="end">${i?'0 free':'3 free'}</text>`).join(''))
-  +px(175,`<text class="tk" x="187" y="48" ${B(11)}>City Center Hub</text><rect class="g" x="187" y="54" width="70" height="6" rx="3"/><rect class="s" x="187" y="70" width="86" height="18" rx="9"/><text class="tw" x="230" y="83" text-anchor="middle">2 of 4 free</text>`+['CCS2','Type 2'].map((t,i)=>`<rect class="f" x="${187+i*54}" y="100" width="48" height="18" rx="9"/><text class="tk" x="${211+i*54}" y="113" text-anchor="middle">${t}</text>`).join('')+[0,1,2].map(i=>`<rect class="f" x="187" y="${132+i*34}" width="106" height="26" rx="6"/><rect class="g" x="195" y="${141+i*34}" width="${[44,60,36][i]}" height="8" rx="4"/><rect class="s" x="${263-[0,6,0][i]}" y="${141+i*34}" width="22" height="8" rx="4"/>`).join('')+`<rect class="s" x="187" y="244" width="106" height="30" rx="15"/><text class="tw" x="240" y="263" text-anchor="middle">Navigate</text>`)
-  +px(330,`<circle class="l" cx="395" cy="104" r="44" style="stroke-width:8;opacity:.25"/><path class="l" d="M395 60A44 44 0 1 1 355.1 122.6" style="stroke-width:8;stroke-linecap:round"/><text class="tk" x="395" y="112" text-anchor="middle" style="font-size:22px;font-weight:700">68%</text><text class="tk" x="395" y="170" text-anchor="middle">24 min left</text>`+[0,1].map(i=>`<rect class="f" x="342" y="${184+i*28}" width="106" height="22" rx="6"/><rect class="g" x="350" y="${191+i*28}" width="40" height="8" rx="4"/><rect class="s" x="410" y="${191+i*28}" width="30" height="8" rx="4"/>`).join('')+`<rect class="w l" x="342" y="244" width="106" height="30" rx="15"/><text class="tk" x="395" y="263" text-anchor="middle">Stop charging</text>`)
- ],
- watt:[
-  win(sidenav(['Overview','Devices','Reports','Goals'])+tabs(['Day','Week','Month'])+kpi(104)+kpi(224)+kpi(344)
-   +`<rect class="l" x="104" y="152" width="246" height="128" rx="8"/><path class="l" d="M118 252c24-30 36 6 60-22s40-34 64-8 44-30 90-12"/><circle class="s" cx="178" cy="230" r="4"/><rect class="g" x="118" y="164" width="60" height="7" rx="3.5"/>`
-   +`<rect class="f" x="360" y="152" width="104" height="128" rx="8"/><circle class="l" cx="412" cy="198" r="26" style="stroke-width:10;opacity:.3"/><path class="l" d="M412 172A26 26 0 0 1 436.7 190" style="stroke-width:10"/>`
-   +[0,1,2].map(i=>`<circle class="${i?'g':'s'}" cx="374" cy="${240+i*14}" r="4"/><rect class="g" x="384" y="${236+i*14}" width="${[60,48,40][i]}" height="7" rx="3.5"/>`).join('')),
-  win(sidenav(['Overview','Devices','Reports','Goals'],3)+`<text class="tk" x="104" y="64" ${B(13)}>Monthly goal</text><rect class="f" x="104" y="76" width="356" height="68" rx="8"/><text class="tk" x="118" y="98" ${B(11)}>68% of goal used</text><text class="tk" x="446" y="98" text-anchor="end">12 days left</text><rect class="w l" x="118" y="110" width="328" height="12" rx="6"/><rect class="s" x="118" y="110" width="223" height="12" rx="6"/><rect class="g" x="118" y="130" width="120" height="6" rx="3"/>`
-   +`<text class="tk" x="104" y="166" ${B(11)}>Biggest consumers</text>`
-   +['Air conditioner','Water heater','Refrigerator'].map((t,i)=>`<rect class="w l" x="104" y="${176+i*34}" width="250" height="28" rx="6"/><rect class="f" x="112" y="${183+i*34}" width="14" height="14" rx="3"/><text class="tk" x="134" y="${194+i*34}">${t}</text><rect class="s" x="${292-[0,36,66][i]*0}" y="${186+i*34}" width="${[52,34,20][i]}" height="8" rx="4"/>`).join('')
-   +`<rect class="f" x="368" y="166" width="96" height="114" rx="8"/><circle class="s" cx="386" cy="188" r="10"/><text class="tw" x="386" y="192" text-anchor="middle" ${B(11)}>!</text><text class="tk" x="402" y="192" ${B(11)}>Tip</text><rect class="g" x="378" y="210" width="76" height="7" rx="3.5"/><rect class="g" x="378" y="224" width="64" height="7" rx="3.5"/><rect class="g" x="378" y="238" width="72" height="7" rx="3.5"/><rect class="s" x="378" y="254" width="76" height="16" rx="8"/><text class="tw" x="416" y="266" text-anchor="middle">Set 24°C</text>`)
- ]
-};
-const CP=[
- {id:'trails',kind:'Website',t:'Pune Trails',line:'A trek guide that helps beginners choose and plan.',img:0,
-  problem:'Trek information is scattered across blogs and chat groups, so a first-time trekker cannot easily tell whether a route suits them.',
-  goal:'Help a beginner choose a suitable trek and know how to prepare in about two minutes.',
-  dec:['Filters come first (difficulty, month, duration), because those three decide whether a trek is suitable.','Difficulty is a plain-language badge with the time it takes, not just a label like "moderate".','The itinerary and a packing checklist sit on the same page, so nobody has to switch tabs while planning.'],
-  shots:[[0,'Home page: filters sit directly under the headline and trek cards show difficulty and time at a glance.'],[1,'Trek page: key facts, a numbered itinerary and a "before you go" checklist, with one clear action.']],
-  flow:['Browse','Filter','Compare','Plan'],next:'Test the filters with five first-time trekkers and check whether they pick the right trek unaided.'},
- {id:'charge',kind:'Mobile app',t:'ChargeNear',line:'An EV charger finder that shows what is free, compatible and priced.',img:0,
-  problem:'EV owners need to know a charger is free, fits their connector and costs what they expect before they drive there.',
-  goal:'Take a driver from "I need to charge" to navigating to a working charger in a few taps.',
-  dec:['Availability is shown on the map pin and in the list, so the answer is visible before opening a station.','Connector type is a filter set once, so incompatible chargers never appear.','The charging screen leads with time left in plain words, with the battery ring as support.'],
-  shots:[[0,'Three key screens: map with nearby chargers, station detail with connectors and a Navigate button, and the live charging session.']],
-  flow:['Find','Check','Navigate','Charge'],next:'Prototype the flow and test whether people can find a compatible, free charger in under a minute.'},
- {id:'watt',kind:'Web app',t:'WattWise',line:'A home energy dashboard that explains what drives the bill.',img:0,
-  problem:'Households see one monthly bill but not which appliances cause it, so they cannot tell what to change.',
-  goal:'Make the biggest source of usage obvious and give a small, specific action to reduce it.',
-  dec:['The dashboard leads with one number and a monthly goal, then breaks usage down by appliance, not by technical units.','Each tip is tied to the top consumer, so advice is specific and actionable.','Chart segments have text labels, so meaning never depends on color alone.'],
-  shots:[[0,'Overview: summary cards, a usage trend and an appliance breakdown.'],[1,'Goals: progress against the monthly goal, the biggest consumers and one specific tip.']],
-  flow:['See usage','Find the cause','Set a goal','Track'],next:'Test with five households to see whether they can name their biggest consumer after one minute.'}
-];
-$('#clist').innerHTML=CP.map(p=>`<li><button class="ccard" type="button" data-c="${p.id}" aria-haspopup="dialog"><svg class="sketch cthumb" viewBox="0 0 480 300" role="img" aria-label="Preview of the ${p.t} concept design">${CPM[p.id][p.img]}</svg><span class="kind">${p.kind} · Concept</span><h3>${p.t}</h3><p>${p.line}</p><span class="more">View concept</span></button></li>`).join('');
-const cdlg=$('#cdlg');
-document.addEventListener('click',e=>{
- const b=e.target.closest('[data-c]');if(!b)return;
- const p=CP.find(x=>x.id===b.dataset.c);opener=b;
- $('#cc').innerHTML=`<span class="pill">Concept project · ${p.kind} · sample content</span><h2 id="ct">${p.t}</h2><p style="color:var(--muted)">${p.line}</p>`
-  +`<h3>Problem</h3><p>${p.problem}</p><h3>Goal</h3><p>${p.goal}</p><h3>Key design decisions</h3><ul>${p.dec.map(d=>`<li>${d}</li>`).join('')}</ul>`
-  +p.shots.map(([i,c])=>`<figure><svg class="sketch" viewBox="0 0 480 300" role="img" aria-label="${c}">${CPM[p.id][i]}</svg><figcaption>${c}</figcaption></figure>`).join('')
-  +`<h3>Flow</h3><svg class="sketch" viewBox="0 0 480 120" role="img" aria-label="Flow: ${p.flow.join(', then ')}">${flow(p.flow)}</svg>`
-  +`<h3>What I would do next</h3><p>${p.next}</p><p class="note">This is a concept project. The content is sample data, and there are no real users or results behind it.</p>`;
- cdlg.showModal();
-});
-cdlg.addEventListener('click',e=>{if(e.target===cdlg||e.target.hasAttribute('data-close'))cdlg.close()});
-cdlg.addEventListener('close',()=>opener&&opener.focus());
 
 /* hero background: shapes drift slightly with the pointer */
 const hero=$('#top');
