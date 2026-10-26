@@ -8,7 +8,7 @@
 <meta property="og:title" content="Shubhamkar Bhalerao, UI/UX Designer and Frontend Engineer">
 <meta property="og:description" content="Case studies, experience and contact details.">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0f'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'%3ESB%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' width='120' height='120'%3E%3Crect width='120' height='120' rx='30' fill='%233b3bff'/%3E%3Cg transform='translate%28-2.5 0%29' fill='none' stroke='%23ffffff' stroke-width='11' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M49 38.6A13 13 0 1 0 39 60A13 13 0 1 1 29 81.4'/%3E%3Cpath d='M70 34V86M70 34h14a13 13 0 0 1 0 26H70M70 60h16a13 13 0 0 1 0 26H70'/%3E%3C/g%3E%3Cg transform='translate%28-2.5 0%29'%3E%3Crect x='44.5' y='34.1' width='9' height='9' rx='1.5' fill='%235eead4' /%3E%3Crect x='24.5' y='76.9' width='9' height='9' rx='1.5' fill='%235eead4' /%3E%3Crect x='65.5' y='29.5' width='9' height='9' rx='1.5' fill='%235eead4' /%3E%3Crect x='65.5' y='81.5' width='9' height='9' rx='1.5' fill='%235eead4' /%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Archivo+Narrow:wght@500;700&display=swap" rel="stylesheet">
@@ -155,6 +155,10 @@ dialog p,dialog ul{margin:0}dialog ul{padding-left:20px}dialog li{margin-bottom:
 .tl{position:relative;overflow:hidden}.tl>.wrap{position:relative;z-index:1}
 .tl::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.7;background:repeating-linear-gradient(135deg,var(--line) 0 1px,transparent 1px 22px);-webkit-mask-image:linear-gradient(100deg,transparent 35%,#000);mask-image:linear-gradient(100deg,transparent 35%,#000)}
 .cta2::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(color-mix(in srgb,var(--on-accent) 26%,transparent) 1.3px,transparent 1.5px) 0 0/26px 26px;-webkit-mask-image:linear-gradient(60deg,#000,transparent 55%);mask-image:linear-gradient(60deg,#000,transparent 55%)}
+.brand{gap:10px}.brand .mk{flex:none;display:block}
+.brand .lb{fill:var(--accent)}.brand .lg{stroke:var(--on-accent)}.brand .la{fill:#5eead4}
+:root[data-theme="dark"] .brand .la{fill:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand .la{fill:#fff}}
 @media (max-width:900px){.avatar{width:80px;height:80px}.frame{margin-left:14px;max-width:300px}.badge{left:-14px}}
 
 @media (max-width:900px){
@@ -177,7 +181,7 @@ dialog p,dialog ul{margin:0}dialog ul{padding-left:20px}dialog li{margin-bottom:
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site"><div class="wrap bar">
- <a class="brand" href="#top">Shubhamkar B.</a>
+ <a class="brand" href="#top"><svg class="mk" viewBox="0 0 120 120" width="36" height="36" aria-hidden="true" focusable="false"><rect width="120" height="120" rx="30" class="lb"/><g transform="translate(-2.5 0)" fill="none" class="lg" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M49 38.6A13 13 0 1 0 39 60A13 13 0 1 1 29 81.4"/><path d="M70 34V86M70 34h14a13 13 0 0 1 0 26H70M70 60h16a13 13 0 0 1 0 26H70"/></g><g transform="translate(-2.5 0)"><rect x="44.5" y="34.1" width="9" height="9" rx="1.5" class="la" /><rect x="24.5" y="76.9" width="9" height="9" rx="1.5" class="la" /><rect x="65.5" y="29.5" width="9" height="9" rx="1.5" class="la" /><rect x="65.5" y="81.5" width="9" height="9" rx="1.5" class="la" /></g></svg><span>Shubhamkar B.</span></a>
  <nav id="nav" aria-label="Main"><ul>
   <li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="Shubhamkar_Bhalerao_cv.pdf" download>Resume</a></li><li><a href="#contact">Contact</a></li>
  </ul></nav>
